@@ -31,27 +31,24 @@ export default {
 
   data () {
     return {
-      jobs: [
-        {
-          title: 'VueJS Developer',
-          company: 'Startup Stir-fry',
-          description: 'We\'re looking for a rockstar VueJS developer to help us create awesome websites',
-          contactName: 'Nick Crawford',
-          contactEmail: 'ncrawfo7@kent.edu',
-          externalLink: 'https://hacksu.com',
-          createdOn: new Date(),
-        },
-        {
-          title: 'VueJS Developer',
-          company: 'Startup Stir-fry',
-          description: 'We\'re looking for a rockstar VueJS developer to help us create awesome websites',
-          contactName: 'Nick Crawford',
-          contactEmail: 'ncrawfo7@kent.edu',
-          externalLink: 'https://hacksu.com',
-          createdOn: new Date(),
-        }
-      ],
+      jobs: [],
     }
+  },
+  created() {
+    this.$root.db.collection("jobs").where("approved", "==", true)
+    .get()
+    .then((querySnapshot) => {
+        var newJobsArray = [];
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            newJobsArray.push(doc.data())
+        });
+        this.jobs = newJobsArray;
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
   }
 }
 </script>

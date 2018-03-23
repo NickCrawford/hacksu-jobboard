@@ -29,7 +29,6 @@
 <script>
 import Firebase from 'firebase'
 
-
 export default {
 
   name: 'NewJob',
@@ -64,12 +63,17 @@ export default {
 
       if (this.$root.errors.length == 0) {
 
-        this.$root.messages.push('Your job posting has been added to our database. Once it\'s approved, you\'ll see it on this page');
-        this.$router.push('/');
+        this.$root.db.collection("jobs")
+        .add(this.newJob)
+        .then(() => {
+          this.$root.messages.push('Your job posting has been added to our database. Once it\'s approved, you\'ll see it on this page');
+          this.$router.push('/');
+        })
+        .catch(function(error) {
+          console.log("Error getting documents: ", error);
+        });
       }
 
-
-      
     }
   }
 }
