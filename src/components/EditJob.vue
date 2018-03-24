@@ -21,6 +21,9 @@
       <label for="contact-email">Contact Email</label>
       <input type="text" name="contact-email" v-model="newJob.contactEmail" />
 
+      <label>Approved to show on Job Board?</label>
+      <input type="checkbox" name="approved" v-model="newJob.approved">
+
       <input type="submit" class="btn" value="Save Changes">
     </form>
   </div>
