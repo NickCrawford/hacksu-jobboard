@@ -8,10 +8,10 @@
     <ul>
       <li v-for="job in jobs">
         <h2>{{ job.title }}</h2>
+        <router-link :to="{ name: 'EditJob', params: { id: job.id }}">Edit</router-link> 
         <h3>{{ job.company }}</h3>
         <p>{{ job.description }}</p>
         <p>Posted on {{ job.createdOn }}</p>
-
         <details>
           <summary>View Contact Information</summary>
 
@@ -42,7 +42,9 @@ export default {
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            newJobsArray.push(doc.data())
+            var newJob = doc.data();
+            newJob.id = doc.id;
+            newJobsArray.push(newJob);
         });
         this.jobs = newJobsArray;
     })

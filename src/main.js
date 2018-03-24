@@ -7,6 +7,7 @@ import App from './App.vue'
 
 import JobBoard from './components/JobBoard'
 import NewJob from './components/NewJob'
+import EditJob from './components/EditJob'
 
 import firebaseConfig from './config'
 
@@ -18,7 +19,8 @@ Vue.use(Router)
 
 const routes = [
   { path: '/', component: JobBoard },
-  { path: '/new', component: NewJob, name: 'NewJob' }
+  { path: '/new', component: NewJob, name: 'NewJob' },
+  { path: '/edit/:id', component: EditJob, name: 'EditJob'}
 ]
 
 const router = new Router({
