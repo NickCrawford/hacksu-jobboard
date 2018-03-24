@@ -35,7 +35,7 @@ export default {
     }
   },
   created() {
-    this.$root.db.collection("jobs").where("approved", "==", true)
+    this.$root.db.collection("jobs")
     .get()
     .then((querySnapshot) => {
         var newJobsArray = [];
